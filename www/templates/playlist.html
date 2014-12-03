@@ -20,51 +20,10 @@
 	        <ion-radio ng-model="saveData.answer[$index]" name="group_{{$index}}" ng-value="{{question.answer_4_value}}">{{question.answer_4}}</ion-radio>
 
 
-
-
-
-	        <!-- <div class="item item-text-wrap">
-	        	<label class="item item-radio">
-				    <input type="radio" name="group_{{$index}}"  ng-model="saveData.answer[$index]" ng-value="{{question.answer_1_value}}">
-				    <div class="item-content">
-				      {{question.answer_1}}
-				    </div>
-				    <i class="radio-icon ion-checkmark"></i>
-				</label>
-	        </div>
-	        <div class="item item-text-wrap">
-	        	<label class="item item-radio">
-				    <input type="radio" name="group_{{$index}}" ng-model="saveData.answer[$index]" ng-value="{{question.answer_2_value}}">
-				    <div class="item-content">
-				      {{question.answer_2}}
-				    </div>
-				    <i class="radio-icon ion-checkmark"></i>
-				</label>
-	        </div>
-	        <div class="item item-text-wrap">
-	        	<label class="item item-radio">
-				    <input type="radio" name="group_{{$index}}" ng-model="saveData.answer[$index]" ng-value="{{question.answer_3_value}}">
-				    <div class="item-content">
-				      {{question.answer_3}}
-				    </div>
-				    <i class="radio-icon ion-checkmark"></i>
-				</label>
-	        </div>
-	        <div class="item item-text-wrap">
-	        	<label class="item item-radio">
-				    <input type="radio" name="group_{{$index}}" ng-model="saveData.answer[$index]" ng-value="{{question.answer_4_value}}">
-				    <div class="item-content">
-				      {{question.answer_4}}
-				    </div>
-				    <i class="radio-icon ion-checkmark"></i>
-				</label>
-	        </div> -->
-	       </div>
-	     
       </ion-item>
       </form>
     </ion-list>
-     
+    </div>
     <button ng-show='!haveAnswer' class="button button-block button-positive" ng-click="submit()">Submit</button>
   </ion-content>
 </ion-view>
