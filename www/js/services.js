@@ -6,7 +6,7 @@ angular.module('starter.services', [])
  .factory('ParseQueries', function($window,$q) {
  	var tokenStore = $window.localStorage;
 
- 	function getQuestionList(update){
+ 	function getQuestionList(update,genderType){
  		var defer = $q.defer();
  		if (!update && tokenStore.links != undefined){
  			defer.resolve(JSON.parse(tokenStore.links));
@@ -14,6 +14,7 @@ angular.module('starter.services', [])
 
  			var QuestionListObject = Parse.Object.extend("questionList");
  			var query = new Parse.Query(QuestionListObject);
+            query.equalTo("male_female_both", genderType);
  			query.find({
  				success: function(results){
  					var links = [];
