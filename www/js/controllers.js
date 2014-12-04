@@ -2,25 +2,6 @@ angular.module('starter.controllers', [])
 
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
-  // Form data for the login modal
-  $scope.loginData = {};
-
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
-
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-  };
 
   // Perform the login action when the user submits the login form
   $scope.clearLocalStorage = function() {
@@ -28,16 +9,16 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('QuestionListCtrl',  function($scope,$q,$ionicLoading,ParseQueries){
+.controller('QuestionListCtrl',  function($scope,$q,$ionicLoading,ParseQueries,genderType){
   $scope.links = [];
-        
+  $scope.title = genderType === 'm' ? "Boys":genderType === 'f' ? "Girls" : "Both";
   getData(false);
 
   function getData(update){
     $ionicLoading.show({
       template: 'Loading...'
     });
-    ParseQueries.getQuestionList(update).then(function success(res){
+    ParseQueries.getQuestionList(update,genderType).then(function success(res){
       $scope.links = res;
       $scope.$broadcast('scroll.refreshComplete');
       $ionicLoading.hide();
@@ -55,7 +36,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('QuestionCtrl', function($scope, $stateParams,$q,$ionicLoading,ParseQueries,$window,$ionicListDelegate) {
+.controller('QuestionCtrl', function($scope, $stateParams,$q,$ionicLoading,ParseQueries,$window,$ionicScrollDelegate) {
   $scope.saveData= {};
   $scope.questions = []; 
   $scope.haveAnswer = false;
@@ -63,7 +44,6 @@ angular.module('starter.controllers', [])
 
   getData(false);
   function getData(update){
-    $ionicListDelegate.canSwipeItems(false);
       $ionicLoading.show({
         template: 'Loading...'
       });
@@ -84,7 +64,8 @@ $scope.share = function(){
   
 
   $scope.submit = function(){
-    $ionicListDelegate.canSwipeItems(false);
+//    $scope.$broadcast('scroll.scrollTop');
+    $ionicScrollDelegate.scrollTop();
     $scope.scroll = false;  
     $scope.haveAnswer = true;
   

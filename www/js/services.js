@@ -8,8 +8,8 @@ angular.module('starter.services', [])
 
  	function getQuestionList(update,genderType){
  		var defer = $q.defer();
- 		if (!update && tokenStore.links != undefined){
- 			defer.resolve(JSON.parse(tokenStore.links));
+ 		if (!update && tokenStore["links_"+genderType] != undefined){
+ 			defer.resolve(JSON.parse(tokenStore["links_"+genderType]));
  		}else{
 
  			var QuestionListObject = Parse.Object.extend("questionList");
@@ -21,7 +21,7 @@ angular.module('starter.services', [])
  					for (var j = 0; j < results.length; j++) {
  						links.push({"id": results[j].id, "questionnaireId": results[j].attributes.questionnaireId,"subject":results[j].attributes.subject});
  					}
- 					tokenStore.links = JSON.stringify(links);
+ 					tokenStore["links_"+genderType] = JSON.stringify(links);
  					defer.resolve(links);
 
  				},
