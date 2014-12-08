@@ -14,12 +14,14 @@ angular.module('starter.services', [])
 
  			var QuestionListObject = Parse.Object.extend("questionList");
  			var query = new Parse.Query(QuestionListObject);
-            query.equalTo("male_female_both", genderType);
+            if (genderType != 'b') {
+                query.equalTo("male_female_both", genderType);
+            }
  			query.find({
  				success: function(results){
  					var links = [];
  					for (var j = 0; j < results.length; j++) {
- 						links.push({"id": results[j].id, "questionnaireId": results[j].attributes.questionnaireId,"subject":results[j].attributes.subject});
+ 						links.push({"id": results[j].id, "questionnaireId": results[j].attributes.questionnaireId,"subject":results[j].attributes.subject,"gender":results[j].attributes.male_female_both});
  					}
  					tokenStore["links_"+genderType] = JSON.stringify(links);
  					defer.resolve(links);

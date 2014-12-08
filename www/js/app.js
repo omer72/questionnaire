@@ -86,6 +86,6 @@ angular.module('starter', ['ionic', 'ngCordova','starter.controllers','starter.s
                 }
             });
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/girls');
+        $urlRouterProvider.otherwise('/app/both');
     });
 

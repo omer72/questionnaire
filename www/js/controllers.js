@@ -64,7 +64,6 @@ $scope.share = function(){
   
 
   $scope.submit = function(){
-//    $scope.$broadcast('scroll.scrollTop');
     $ionicScrollDelegate.scrollTop();
     $scope.scroll = false;  
     $scope.haveAnswer = true;

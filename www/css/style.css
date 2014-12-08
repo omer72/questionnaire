@@ -8,3 +8,14 @@
 .questionHeader{
 	text-align: center;
 }
+
+.boysIcon{
+    color: green;
+}
+
+.girlsIcon{
+    color: deeppink;
+}
+.bothIcon{
+    color: blue;
+}
