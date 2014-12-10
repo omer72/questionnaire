@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.questionnaire896903" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>שאלונים</name>
+  <name>Questionnaire</name>
   <description>
-        An Ionic Framework and Cordova project.
+        Questionnaire App
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="omer72@gmail.com" href="il.linkedin.com/in/omer72/">
+      Omer Etrog
     </author>
   <content src="index.html"/>
   <access origin="*"/>
@@ -13,10 +13,17 @@
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="BackupWebStorage" value="none"/>
+  <preference name="LoadingDialog" value="Welcome to Questionnaire"/>
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
   <feature name="SocialSharing">
     <param name="android-package" value="nl.xservices.plugins.SocialSharing"/>
   </feature>
+    <platform name="android">
+        <icon src="icons/android/res/drawable-ldpi/icon.png" density="ldpi" />
+        <icon src="icons/android/res/drawable-mdpi/icon.png" density="mdpi" />
+        <icon src="icons/android/res/drawable-hdpi/icon.png" density="hdpi" />
+        <icon src="icons/android/res/drawable-xhdpi/icon.png" density="xhdpi" />
+    </platform>
 </widget>
