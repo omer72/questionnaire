@@ -6,9 +6,28 @@ angular.module('starter.services', [])
  .factory('ParseQueries', function($window,$q) {
  	var tokenStore = $window.localStorage;
 
+	function getQuestionCount(){
+		var defer = $q.defer();
+		var QuestionListObject = Parse.Object.extend("questionList");
+		var query = new Parse.Query(QuestionListObject);
+		var savedCount = tokenStore.questions_count;
+		query.count({
+			success: function(count) {
+				if (savedCount != count) {
+					// The count request succeeded. Show the count
+					tokenStore.questions_count = count;
+					defer.resolve(true);
+				}
+			},
+			error: function(error) {
+				defer.reject(error);
+			}
+		});
+		return defer.promise;
+	}
  	function getQuestionList(update,genderType){
  		var defer = $q.defer();
- 		if (!update && tokenStore["links_"+genderType] != undefined){
+ 		if (!update && tokenStore["links_"+genderType] !== undefined){
  			defer.resolve(JSON.parse(tokenStore["links_"+genderType]));
  		}else{
 
@@ -29,9 +48,9 @@ angular.module('starter.services', [])
  				},
  				error : function(err){
  					alert("Error: " + error.code + " " + error.message);
- 					defer.reject(err)
+ 					defer.reject(err);
  				}
- 			})
+ 			});
  		}
  		return defer.promise;
  	}
@@ -39,7 +58,7 @@ angular.module('starter.services', [])
  	function getQuestionData(questionnaireID,update){
 
  		var defer = $q.defer();
- 		if (!update && tokenStore['questions_'+questionnaireID] != undefined){
+ 		if (!update && tokenStore['questions_'+questionnaireID] !== undefined){
  			defer.resolve(JSON.parse(tokenStore['questions_'+questionnaireID]));
  		}else{
  			var QuestionObject = Parse.Object.extend("questionnaire");
@@ -66,16 +85,16 @@ angular.module('starter.services', [])
 
  				},
  				error : function(err){
- 					defer.reject(err)
+ 					defer.reject(err);
  				}
- 			})
+ 			});
  		}
  		return defer.promise;
  	}
 
  	function getQuestionAnswers(questionnaireID){
  		var defer = $q.defer();
- 		if (tokenStore['answers_'+questionnaireID] != undefined){
+ 		if (tokenStore['answers_'+questionnaireID] !== undefined){
  			defer.resolve(JSON.parse(tokenStore['answers_'+questionnaireID]));
  		}else{
 	 		var QuestionObject = Parse.Object.extend("answers");
@@ -95,10 +114,10 @@ angular.module('starter.services', [])
 
 	 			},
 	 			error : function(err){
-	 				alert("Error: " + error.code + " " + error.message);
-	 				defer.reject(err)
+	 				alert("Error: " + err.code + " " + err.message);
+	 				defer.reject(err);
 	 			}
-	 		})
+	 		});
  		}
  		return defer.promise;
  	}
@@ -106,6 +125,7 @@ angular.module('starter.services', [])
  	return{
  		getQuestionList : getQuestionList,
  		getQuestionData : getQuestionData,
- 		getQuestionAnswers : getQuestionAnswers
- 	}
- })
+ 		getQuestionAnswers : getQuestionAnswers,
+		getQuestionCount : getQuestionCount
+ 	};
+ });

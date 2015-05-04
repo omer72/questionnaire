@@ -22,16 +22,26 @@ angular.module('starter.controllers', [])
       $scope.links = res;
       $scope.$broadcast('scroll.refreshComplete');
       $ionicLoading.hide();
-    })
+    });
   }
 
   $scope.doRefresh = function(){
     getData(true);
-  }
+  };
 
   $scope.goTo = function(uuid,messageId){
       $state.go('tab.message-detail',{"index":messageId,"uuid":uuid});
-  }
+  };
+
+      ParseQueries.getQuestionCount().then(
+          function success(res){
+            if (res === true){
+              ParseQueries.getQuestionList(true,'b').then(function success(res){
+                $scope.links = res;
+              });
+            }
+          }
+      );
   
 })
 
@@ -55,11 +65,11 @@ angular.module('starter.controllers', [])
 
   ParseQueries.getQuestionAnswers($stateParams.questionnaireID).then(function success(res){
     main_answers = res;
-  })
+  });
 
 $scope.share = function(){
   $window.plugins.socialsharing.share($scope.questions[0].questionHeader +" : "+$scope.answer, $scope.questions[0].questionHeader);
-}
+};
   
   
 
@@ -69,7 +79,7 @@ $scope.share = function(){
     $scope.haveAnswer = true;
   
     var sum = 0;
-    var length = 0
+    var length = 0;
     for (var key in $scope.saveData.answer) {
       sum += $scope.saveData.answer[key];
       length ++;
@@ -77,7 +87,7 @@ $scope.share = function(){
     var average =  Math.round(sum/length);
     $scope.answer = main_answers[average-1];
     
-  }
+  };
 
 
 
